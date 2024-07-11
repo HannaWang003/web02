@@ -112,3 +112,13 @@ $Total = new DB('total');
 $News = new DB('news');
 $Que = new DB('que');
 $Log = new DB('log');
+if (!isset($_SESSION['visited'])) {
+    $_SESSION['visited'] = 1;
+    if ($Total->find(['date' => date("Y-m-d")]) == 0) {
+        $Total->save(['date' => date("Y-m-d"), 'total' => 1]);
+    } else {
+        $t = $Total->find(['date' => date("Y-m-d")]);
+        $t['total']++;
+        $Total->save($t);
+    }
+}

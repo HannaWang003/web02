@@ -1,6 +1,6 @@
 <fieldset>
     <legend>帳號管理</legend>
-    <form action="./api/del.php" method="post">
+    <form action="./api/edit.php" method="post">
         <table class="tab aut">
             <tr>
                 <th>帳號</th>
@@ -11,13 +11,13 @@
             $rows = $User->all();
             foreach ($rows as $row) {
             ?>
-            <tr>
-                <td style="text-align:center"><?= $row['acc'] ?></td>
-                <td style="text-align:center"><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
-                <td style="text-align:center"><input type="checkbox" name="del[]" value="<?= $row['id'] ?>"></td>
-            </tr>
-            <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
-            <input type="hidden" name="table" value="user">
+                <tr>
+                    <td style="text-align:center"><?= $row['acc'] ?></td>
+                    <td style="text-align:center"><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
+                    <td style="text-align:center"><input type="checkbox" name="del[]" value="<?= $row['id'] ?>"></td>
+                </tr>
+                <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
+                <input type="hidden" name="table" value="user">
             <?php
             }
 
@@ -51,37 +51,37 @@
     </table>
 </fieldset>
 <script>
-function clean() {
-    $('input[type="text"],input[type="password"]').val("")
-}
+    function clean() {
+        $('input[type="text"],input[type="password"]').val("")
+    }
 
-function reg() {
-    let acc = $('#acc').val();
-    let pw = $('#pw').val();
-    let pw2 = $('#pw2').val();
-    let email = $('#email').val();
-    if (acc == "" || pw == "" || pw2 == "" || email == "") {
-        alert("不可空白");
-    } else {
-        if (pw != pw2) {
-            alert("密碼錯誤");
+    function reg() {
+        let acc = $('#acc').val();
+        let pw = $('#pw').val();
+        let pw2 = $('#pw2').val();
+        let email = $('#email').val();
+        if (acc == "" || pw == "" || pw2 == "" || email == "") {
+            alert("不可空白");
         } else {
-            $.post('./api/chk_acc.php', {
-                acc
-            }, (res) => {
-                if (res == 0) {
-                    $.post('./api/reg.php', {
-                        acc,
-                        pw,
-                        email
-                    }, () => {
-                        location.reload();
-                    })
-                } else {
-                    alert("帳號重覆");
-                }
-            })
+            if (pw != pw2) {
+                alert("密碼錯誤");
+            } else {
+                $.post('./api/chk_acc.php', {
+                    acc
+                }, (res) => {
+                    if (res == 0) {
+                        $.post('./api/reg.php', {
+                            acc,
+                            pw,
+                            email
+                        }, () => {
+                            location.reload();
+                        })
+                    } else {
+                        alert("帳號重覆");
+                    }
+                })
+            }
         }
     }
-}
 </script>

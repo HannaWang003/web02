@@ -4,7 +4,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] != "admin") {
     to("index.php");
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -18,7 +19,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] != "admin") {
 </head>
 
 <body>
-    <div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
+    <div id="alerr"
+        style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
         <pre id="ssaa"></pre>
     </div>
     <div id="all">
@@ -49,13 +51,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] != "admin") {
                             echo "<button onclick='location.href=`./api/logout.php`'>登出</button></div>";
                         } else {
                         ?>
-                            <a href="?do=login">會員登入</a>
+                        <a href="?do=login">會員登入</a>
                         <?php
                         }
                         ?>
 
                     </span>
                     <div class="">
+                        <br><br>
                         <?php
                         $do = $_GET['do'] ?? "main";
                         $file = "./back/$do.php";

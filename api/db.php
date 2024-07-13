@@ -14,8 +14,8 @@ function to($url)
 class DB
 {
     protected $table;
-    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db_02";
     protected $pdo;
+    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=a_db02";
     function __construct($table)
     {
         $this->table = $table;
@@ -60,19 +60,11 @@ class DB
     {
         return $this->math("sum", $col, $where, $other);
     }
-    function max($col, $where = "", $other = "")
-    {
-        return $this->math("max", $col, $where, $other);
-    }
-    function min($col, $where = "", $other = "")
-    {
-        return $this->math("min", $col, $where, $other);
-    }
     function save($ary)
     {
         if (isset($ary['id'])) {
             $sql = "update `$this->table` set ";
-            $sql .= join(",", $this->a2s($ary));
+            $sql .= join(" , ", $this->a2s($ary));
             $sql .= " where `id`='{$ary['id']}'";
         } else {
             $sql = "insert into `$this->table` ";
@@ -88,7 +80,7 @@ class DB
         if (is_array($id)) {
             $sql .= join(" && ", $this->a2s($id));
         } elseif (is_numeric($id)) {
-            $sql .= " `id`='$id'";
+            $sql .= "`id`='$id'";
         }
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
@@ -98,27 +90,24 @@ class DB
         if (is_array($id)) {
             $sql .= join(" && ", $this->a2s($id));
         } elseif (is_numeric($id)) {
-            $sql .= " `id`='$id'";
+            $sql .= "`id`='$id'";
         }
         return $this->pdo->exec($sql);
     }
-    function q($sql)
-    {
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
 }
 $User = new DB('user');
-$Total = new DB('total');
+$Log = new DB('log');
 $News = new DB('news');
 $Que = new DB('que');
-$Log = new DB('log');
+$Total = new DB('total');
+
 if (!isset($_SESSION['visited'])) {
     $_SESSION['visited'] = 1;
-    if ($Total->find(['date' => date("Y-m-d")]) == 0) {
-        $Total->save(['date' => date("Y-m-d"), 'total' => 1]);
-    } else {
-        $t = $Total->find(['date' => date("Y-m-d")]);
+    $t = $Total->find(['date' => date("Y-m-d")]);
+    if (!empty($t)) {
         $t['total']++;
         $Total->save($t);
+    } else {
+        $Total->save(['date' => date("Y-m-d"), 'total' => 1]);
     }
 }

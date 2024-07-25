@@ -108,11 +108,12 @@ $Log = new DB('log');
 $News = new DB('news');
 $Que = new DB('que');
 $Total = new DB('total');
+$Type = new DB('type');
 
 if (!isset($_SESSION['visited'])) {
     $_SESSION['visited'] = 1;
-    $t = $Total->find(['date' => date("Y-m-d")]);
-    if (!empty($t)) {
+    if ($Total->count(['date' => date("Y-m-d")]) > 0) {
+        $t = $Total->find(['date' => date("Y-m-d")]);
         $t['total']++;
         $Total->save($t);
     } else {

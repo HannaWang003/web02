@@ -29,47 +29,47 @@ include_once "./api/db.php";
         </div>
         <div id="mm">
             <div class="hal" id="lef">
-                <a class="blo" href="?do=po">分類網誌</a>
-                <a class="blo" href="?do=news">最新文章</a>
-                <a class="blo" href="?do=pop">人氣文章</a>
-                <a class="blo" href="?do=know">講座訊息</a>
-                <a class="blo" href="?do=que">問卷調查</a>
+                <a class="blo" href="?do=user">帳號管理</a>
+                <a class="blo" href="">分類網誌</a>
+                <a class="blo" href="?do=news">最新文章管理</a>
+                <a class="blo" href="">講座管理</a>
+                <a class="blo" href="?do=que">問卷管理</a>
             </div>
             <div class="hal" id="main">
                 <div>
                     <marquee style="width:78%;">請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地!詳見最新文章</marquee>
                     <span style="width:18%; display:inline-block;">
                         <?php
-						if (isset($_SESSION['user'])) {
-						?>
-                        歡迎，<?= $_SESSION['user'] ?><span>
-                            <button onclick="location.href='./api/logout.php'">登出</button>
-                            <?php
-if($_SESSION['user']=="admin"){
-	?>
-                            <button onclick="location.href='back.php'">管理</button>
-                            <?php
-}
-								?>
-                        </span>
+                        if (isset($_SESSION['user'])) {
+                        ?>
+                            歡迎，<?= $_SESSION['user'] ?><span>
+                                <button onclick="location.href='./api/logout.php'">登出</button>
+                                <?php
+                                if ($_SESSION['user'] == "admin") {
+                                ?>
+                                    <button onclick="location.href='back.php'">管理</button>
+                                <?php
+                                }
+                                ?>
+                            </span>
                         <?php
-						} else {
-						?>
-                        <a href="?do=login">會員登入</a>
+                        } else {
+                        ?>
+                            <a href="?do=login">會員登入</a>
                         <?php
-						}
-						?>
+                        }
+                        ?>
                     </span>
                     <div class="">
                         <?php
-						$do = ($_GET['do']) ?? "main";
-						$file = "./front/$do.php";
-						if (file_exists($file)) {
-							include $file;
-						} else {
-							include "./front/main.php";
-						}
-						?>
+                        $do = ($_GET['do']) ?? "main";
+                        $file = "./back/$do.php";
+                        if (file_exists($file)) {
+                            include $file;
+                        } else {
+                            include "./back/main.php";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

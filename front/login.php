@@ -41,7 +41,7 @@
                         if (acc == "admin") {
                             location.href = "back.php";
                         } else {
-                            location.href = "index.php";
+                            history.go(-1);
                         }
                     }
                 })

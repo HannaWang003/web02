@@ -31,7 +31,7 @@ class DB
     private function sql_all($sql, $where, $other)
     {
         if (is_array($where)) {
-            $sql .= " where " . join("&&", $this->a2s($where));
+            $sql .= " where " . join(" && ", $this->a2s($where));
         } else {
             $sql .= " $where ";
         }
@@ -65,7 +65,7 @@ class DB
     function all($where = "", $other = "")
     {
         $sql = "select * from `$this->table` ";
-        $sql .= $this->sql_all($sql, $where, $other);
+        $sql = $this->sql_all($sql, $where, $other);
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     function save($ary)

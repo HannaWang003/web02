@@ -14,7 +14,7 @@ function dd($ary)
 class DB
 {
     protected $table;
-    protected $dsn = "mysql:host=localhost:charset=utf8;dbname=db_02";
+    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db_02";
     protected $pdo;
     function __construct($table)
     {
@@ -41,7 +41,7 @@ class DB
     private function math($math, $col, $where = "", $other = "")
     {
         $sql = "select $math(`$col`) from `$this->table` ";
-        $sql .= $this->sql_all($sql, $where, $other);
+        $sql = $this->sql_all($sql, $where, $other);
         return $this->pdo->query($sql)->fetchColumn();
     }
     function sum($col, $where = "", $other = "")
@@ -59,7 +59,7 @@ class DB
     function count($where = "", $other = "")
     {
         $sql = "select count(*) from `$this->table` ";
-        $sql .= $this->sql_all($sql, $where, $other);
+        $sql = $this->sql_all($sql, $where, $other);
         return $this->pdo->query($sql)->fetchColumn();
     }
     function all($where = "", $other = "")
@@ -113,5 +113,15 @@ if (isset($_GET['do'])) {
     if (isset(${ucfirst($_GET['do'])})) {
         $table = $_GET['do'];
         $DB = ${ucfirst($table)};
+    }
+}
+if (!isset($_SESSION['visited'])) {
+    $_SESSION['visited'] = 1;
+    $total = $Total->find(['date' => date("Y-m-d")]);
+    if (empty($total)) {
+        $Total->save(['date' => date("Y-m-d"), 'total' => 1]);
+    } else {
+        $total['total']++;
+        $Total->save($total);
     }
 }

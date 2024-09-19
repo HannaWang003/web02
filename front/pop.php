@@ -1,11 +1,11 @@
 目前位置:首頁 > 最新文章區
 <?php
 $div = 5;
-$num = $News->count();
+$num = $News->count(['sh' => 1]);
 $now = ($_GET['p']) ?? 1;
 $pages = ceil($num / $div);
 $start = ($now - 1) * $div;
-$rows = $News->all("limit $start,$div");
+$rows = $News->all(['sh' => 1], "limit $start,$div");
 ?>
 <table class="aut">
     <tr>
@@ -59,10 +59,6 @@ $rows = $News->all("limit $start,$div");
     }, function() {
         $(this).children('div').hide();
     })
-
-    function chg(dom) {
-        $(dom).parents('td').children('div').toggle();
-    }
 
     function good(news, good) {
         $.post('./api/good.php?do=log', {

@@ -1,9 +1,9 @@
 <?php
 include_once "db.php";
-$res = $DB->all($_POST);
-foreach ($res as $t) {
+$rows = $DB->all($_POST);
+foreach ($rows as $row) {
 ?>
-    <div onclick="getSection(<?= $t['id'] ?>)" style="margin:15px"><?= $t['title'] ?></div>
+    <div onclick="getArticle(<?= $row['id'] ?>)" style="margin:10px 0"><?= $row['title'] ?></div>
 <?php
 }
 ?>

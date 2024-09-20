@@ -1,8 +1,8 @@
 <?php
 include_once "db.php";
-$res = $DB->find($_POST);
-if (empty($res)) {
-    echo 0;
+$row = $DB->find($_POST);
+if (!empty($row)) {
+    echo "您的密碼為:<span style='color:red'>{$row['pw']}</span>";
 } else {
-    echo "<b style='color:red'>{$res['pw']}</b>";
+    echo "查無此資料";
 }

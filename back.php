@@ -1,8 +1,5 @@
 ﻿<?php
 include_once "./api/db.php";
-if (!isset($_SESSION['user']) || $_SESSION['user'] != "admin") {
-    to("index.php?do=login");
-}
 ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -26,42 +23,40 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] != "admin") {
     <iframe name="back" style="display:none;"></iframe>
     <div id="all">
         <div id="title">
-            <?= date("m月d日l") ?> | 今日瀏覽: <?= $Total->find(['date' => date("Y-m-d")])['total'] ?> |
-            累積瀏覽:<?= $Total->sum('total') ?>
-            <a href="index.php" style="float:right">回首頁</a>
-        </div>
-
+            <?= date("m月d日 l") ?> | 今日瀏覽: <?= $Total->find(['date' => date("Y-m-d")])['total'] ?> | 累積瀏覽:
+            <?= $Total->sum('total') ?> <a href="index.php" style="float:right">回首頁</a> </div>
         <div id="title2">
-            <img src="./icon/02B01.jpg" title="健康促進網 - 回首頁">
+            <img src="./icon/02B01.jpg" alt="">
         </div>
         <div id="mm">
             <div class="hal" id="lef">
                 <a class="blo" href="?do=user">帳號管理</a>
                 <a class="blo" href="?do=po">分類網誌</a>
                 <a class="blo" href="?do=news">最新文章管理</a>
-                <a class="blo" href="?do=know">講座訊息管理</a>
+                <a class="blo" href="?do=know">講座管理</a>
                 <a class="blo" href="?do=que">問卷管理</a>
             </div>
             <div class="hal" id="main">
                 <div>
-                    <marquee behavior="" direction="" style="width:80%;">請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地!詳見最新文章</marquee>
-                    <span style="width:18%; display:inline-block;">
+
+                    <marquee style="width:80%" direction="">請民眾踴躍投稿電子報，讓 電子報成為大家相互交流、分享的園地!詳見最新文章</marquee><span
+                        style="width:18%; display:inline-block;">
                         <?php
                         if (isset($_SESSION['user'])) {
                             echo "歡迎，" . $_SESSION['user'];
                             if ($_SESSION['user'] == "admin") {
                         ?>
-                                <button onclick="location.href='back.php'">管理</button><button
-                                    onclick="location.href='./api/logout.php'">登出</button>
-                            <?php
+                        <button onclick="location.href='back.php'">管理</button><button
+                            onclick="location.href='./api/logout.php'">登出</button>
+                        <?php
                             } else {
                             ?>
-                                <button onclick="location.href='./api/logout.php'">登出</button>
-                            <?php
+                        <button onclick="location.href='./api/logout.php'">登出</button>
+                        <?php
                             }
                         } else {
                             ?>
-                            <a href="index.php?do=login">會員登入</a>
+                        <a href="?do=login">會員登入</a>
                         <?php
                         }
                         ?>

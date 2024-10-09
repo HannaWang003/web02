@@ -37,31 +37,31 @@ include_once "./api/db.php";
                     <marquee style="width:80%;">請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地!詳見最新文章</marquee>
                     <span style="width:18%; display:inline-block;">
                         <?php
-						if (isset($_SESSION['user'])) {
-						?>
-                        <b>歡迎，<?= $_SESSION['user'] ?></b>
-                        <button onclick="logout()">登出</button>
-                        <?= ($_SESSION['user'] == "admin") ? "<button onclick='back.php'>管理</button>" : "" ?>
+                        if (isset($_SESSION['user'])) {
+                        ?>
+                            <b>歡迎，<?= $_SESSION['user'] ?></b>
+                            <button onclick="logout()">登出</button>
+                            <?= ($_SESSION['user'] == "admin") ? "<a href='back.php'><button>管理</button></a>" : "" ?>
                         <?php
-						} else {
-						?>
-                        <a href="?do=user">會員登入</a>
+                        } else {
+                        ?>
+                            <a href="?do=user">會員登入</a>
                         <?php
-						}
-						?>
+                        }
+                        ?>
                     </span>
                     <div class="">
                         <?php
-						$do = ($_GET['do']) ?? "type";
-						$file = "./front/$do.php";
-						if (file_exists($file)) {
-							$DB = (${ucfirst($do)}) ?? "";
-							include $file;
-						} else {
-							$DB = ${ucfirst("type")};
-							include "./front/type.php";
-						}
-						?>
+                        $do = ($_GET['do']) ?? "type";
+                        $file = "./front/$do.php";
+                        if (file_exists($file)) {
+                            $DB = (${ucfirst($do)}) ?? "";
+                            include $file;
+                        } else {
+                            $DB = ${ucfirst("type")};
+                            include "./front/type.php";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -115,7 +115,7 @@ $User = new DB('user'); //id,acc,pw,email;
 $Total = new DB('total'); //id,total,date;
 $Que = new DB('que'); //id,text,big_id,vote;
 
-if (isset($_GET['do'])) {
+if (isset($_GET['do']) && isset(${ucfirst($_GET['do'])})) {
     $do = $_GET['do'];
     $DB = ${ucfirst($do)};
 }

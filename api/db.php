@@ -9,7 +9,7 @@ function dd($ary)
 {
     echo "<pre>";
     print_r($ary);
-    echo "</pr>";
+    echo "</pre>";
 }
 class DB
 {
@@ -31,7 +31,7 @@ class DB
     private function sql_all($sql, $where, $other)
     {
         if (is_array($where)) {
-            $sql .= " where " . join(" && ", $this->a2s($where));
+            $sql .= " where " . join(" && ", $this->a2s($where, $other));
         } else {
             $sql .= " $where ";
         }
@@ -69,7 +69,7 @@ class DB
         if (isset($ary['id'])) {
             $sql = "update `$this->table` set ";
             $sql .= join(",", $this->a2s($ary));
-            $sql .= " where `id`='{$ary['id']}'";
+            $sql .= "`id`='{$ary['id']}'";
         } else {
             $sql = "insert into `$this->table` ";
             $col = "(`" . join("`,`", array_keys($ary)) . "`)";
@@ -108,14 +108,14 @@ class DB
         return $tmp;
     }
 }
-$Log = new DB('log'); //id,acc,news
-$News = new DB('news'); //id,title,text,type,sh
-$User = new DB('user'); //id,acc,pw,email
-$Total = new DB('total'); //id,total,date
-$Que = new DB('que'); //id,text,big_id,vote
-$Type = new DB('type'); //id,type,text
+$Log = new DB('log'); //id,acc,news;
+$News = new DB('news'); //id,title,text,type,sh;
+$Type = new DB('type'); //id,type,text;
+$User = new DB('user'); //id,acc,pw,email;
+$Total = new DB('total'); //id,total,date;
+$Que = new DB('que'); //id,text,big_id,vote;
 
-if (isset($_GET['do']) && isset(${ucfirst($_GET['do'])})) {
+if (isset($_GET['do'])) {
     $do = $_GET['do'];
     $DB = ${ucfirst($do)};
 }
@@ -123,7 +123,7 @@ if (isset($_GET['do']) && isset(${ucfirst($_GET['do'])})) {
 if (!isset($_SESSION['visited'])) {
     $_SESSION['visited'] = 1;
     if ($Total->count(['date' => date("Y-m-d")]) <= 0) {
-        $Total->save(['date' => date("Y-m-d"), 'total' => 1]);
+        $Total->save(['date' => date("Y-m-d"), 'Total' => 1]);
     } else {
         $t = $Total->find(['date' => date("Y-m-d")]);
         $t['total']++;

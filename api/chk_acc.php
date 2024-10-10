@@ -8,5 +8,5 @@ if (isset($_POST['acc'], $_POST['pw'], $_POST['email'])) {
         $_SESSION['user'] = $_POST['acc'];
     }
 } else {
-    echo $res = $DB->count($_POST);
+    echo $DB->count($_POST);
 }

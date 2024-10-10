@@ -9,28 +9,24 @@
         <?php
         $div = 5;
         $now = ($_GET['p']) ?? 1;
-        $pages = $News->pages($div, $now, ['sh' => 1]);
-        $rows = $News->all(['sh' => 1], "order by type limit {$pages['start']},$div");
+        $pages = $DB->pages($div, $now, ['sh' => 1]);
+        $rows = $DB->all(['sh' => 1], "order by type limit {$pages['start']},$div");
         foreach ($rows as $row) {
         ?>
-            <tr>
-                <td class="clo"><?= $row['title'] ?></td>
-                <td class="s" style="position:relative;">
-                    <div><?= mb_substr($row['text'], 0, 20) ?></div>
-                    <div class="alerr"
-                        style="background:rgba(51,51,51,0.8); color:#FFF; height:300px; width:450px; position:absolute; display:none; z-index:999; overflow:auto;left:10%;padding:10px 20px;">
-                        <h3><?= $row['title'] ?></h3>
-                        <?= nl2br($row['text']) ?>
-                    </div>
-                </td>
-                <td>
-                    <?php
+        <tr>
+            <td class="clo"><?= $row['title'] ?></td>
+            <td>
+                <div class="s"><?= mb_substr($row['text'], 0, 20) ?></div>
+                <div class="a" style="display:none;"><?= nl2br($row['text']) ?></div>
+            </td>
+            <td>
+                <?php
                     if (isset($_SESSION['user'])) {
                         echo ($Log->count(['acc' => $_SESSION['user'], 'news' => $row['id']]) > 0) ? "<button onclick='good({$row['id']},0)'>收回讚</button>" : "<button onclick='good({$row['id']},1)'>讚</button>";
                     }
                     ?>
-                </td>
-            </tr>
+            </td>
+        </tr>
         <?php
         }
         ?>
@@ -47,18 +43,23 @@
     </div>
 </fieldset>
 <script>
-    function good(news, good) {
-        $.post('./api/good.php?do=log', {
-            news,
-            good
-        }, (res) => {
-            console.log(res)
-            location.reload();
-        })
-    }
-    $('.s').hover(function() {
-        $(this).children('.alerr').show();
-    }, () => {
-        $('.alerr').hide();
+function good(news, good) {
+    $.post('./api/good.php?do=log', {
+        news,
+        good
+    }, (res) => {
+        console.log(res)
+        location.reload();
     })
+}
+$('.s').on('click', function() {
+    $('.a').hide();
+    $('.s').show();
+    $(this).hide();
+    $(this).siblings('.a').show();
+})
+$('.a').on('click', function() {
+    $('.a').hide();
+    $('.s').show();
+})
 </script>

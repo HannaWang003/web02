@@ -69,7 +69,7 @@ class DB
         if (isset($ary['id'])) {
             $sql = "update `$this->table` set ";
             $sql .= join(",", $this->a2s($ary));
-            $sql .= "`id`='{$ary['id']}'";
+            $sql .= "where `id`='{$ary['id']}'";
         } else {
             $sql = "insert into `$this->table` ";
             $col = "(`" . join("`,`", array_keys($ary)) . "`)";
@@ -115,7 +115,7 @@ $User = new DB('user'); //id,acc,pw,email;
 $Total = new DB('total'); //id,total,date;
 $Que = new DB('que'); //id,text,big_id,vote;
 
-if (isset($_GET['do'])) {
+if (isset($_GET['do']) && isset(${ucfirst($_GET['do'])})) {
     $do = $_GET['do'];
     $DB = ${ucfirst($do)};
 }

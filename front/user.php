@@ -1,4 +1,4 @@
-<fieldset class="tab aut">
+<fieldset class="fie_acc">
     <legend><b>會員登入</b></legend>
     <table class="tab aut">
         <tr>
@@ -18,32 +18,32 @@
     </table>
 </fieldset>
 <script>
-function login() {
-    let acc = $('#acc').val();
-    $.post('./api/chk_acc.php?do=user', {
-        acc
-    }, (res) => {
-        if (res <= 0) {
-            alert("查無帳號");
-            clean();
-        } else {
-            let pw = $('#pw').val();
-            $.post('./api/chk_acc.php?do=user', {
-                acc,
-                pw
-            }, (res) => {
-                if (res <= 0) {
-                    alert("密碼錯誤");
-                    clean()
-                } else {
-                    location.href = (acc == "admin") ? "back.php" : "index.php";
-                }
-            })
-        }
-    })
-}
+    function login() {
+        let acc = $('#acc').val();
+        $.post('./api/chk_acc.php?do=user', {
+            acc
+        }, (res) => {
+            if (res <= 0) {
+                alert("查無帳號");
+                clean();
+            } else {
+                let pw = $('#pw').val();
+                $.post('./api/chk_acc.php?do=user', {
+                    acc,
+                    pw
+                }, (res) => {
+                    if (res <= 0) {
+                        alert("密碼錯誤");
+                        clean()
+                    } else {
+                        location.href = (acc == "admin") ? "back.php" : "index.php";
+                    }
+                })
+            }
+        })
+    }
 
-function clean() {
-    location.reload();
-}
+    function clean() {
+        location.reload();
+    }
 </script>

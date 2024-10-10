@@ -147,9 +147,8 @@ input[type=radio]
 }
 .bordt
 {
-	border-top:#666 1px solid;
-	border-left:#666 1px solid;
-	padding:0px;
+	border:#aaa 1px solid;
+	padding:10px;
 	display:inline-block;
 	border-radius:2px 2px 0px 0px;
 }
@@ -277,7 +276,7 @@ cursor:default;
 	display:inline-block;
 	background-position:0px 2px;
 }
-#alerr h3
+.alerr h3
 {
 	color:#0CF;
 }
@@ -296,4 +295,18 @@ cursor:default;
 	left:0px;
 	right:0px;
 	margin:auto;
+}
+
+.fie_acc{
+	border:1px solid #aaa;
+	border-radius:0 0 50px 0;
+	padding:10px;
+	margin:auto;
+	width:85%;
+}
+.fie{
+	border:1px solid #aaa;
+	padding:10px;
+	margin:5px;
+	width:85%;
 }

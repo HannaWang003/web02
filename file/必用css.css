@@ -1,0 +1,53 @@
+#mm
+{
+	height:530px;
+}
+#all
+{
+	padding: 10px;
+	width: 1024px;
+	height: 768px;
+	background: #FFF;
+	margin: 10px auto 10px auto;
+	box-shadow: #999 0px 0px 1px .3px;
+	position: relative;
+}
+#lef
+{
+	width:18.2%;
+	padding:2px;
+	background:url(../icon/02B04.png) repeat-y;
+	/*background-size:100% auto;*/
+	height:530px;
+	display:inline-block;
+	vertical-align:top;
+	position:relative;
+	top:-3px;
+}
+#mm
+{
+	padding-top:3px;
+}
+#main
+{
+	display:inline-block;
+	width: 79%;
+	height:530px;
+	padding:4px;
+	border:solid 1px #000000;
+	overflow:auto;
+	position:relative;
+	left:1%;
+}
+.ct
+{
+	text-align:center;
+}
+.bordt
+{
+	border-top:#aaa 1px solid;
+	border-left:#aaa 1px solid;
+	padding:10px;
+	display:inline-block;
+	border-radius:2px 2px 0px 0px;
+}

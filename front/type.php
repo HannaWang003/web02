@@ -1,19 +1,12 @@
 <style>
-#tags {
-    display: flex;
-    margin-left: 1px;
-}
-
 .tag {
-    border: 1px solid #aaa;
     background: #eee;
-    padding: 10px 20px;
-    margin-left: -1px;
-    border-radius: 10px 10px 0 0;
+    cursor: pointer;
 }
 
 .active {
     border-bottom: 1px solid #fff;
+    border-right: #aaa 1px solid;
     background: #fff;
 }
 
@@ -23,16 +16,14 @@
     padding: 20px 40px;
 }
 </style>
-<div id="tags">
-    <?php
+<?php
     $rows = $DB->all();
     foreach ($rows as $row) {
     ?>
-    <div class="tag" data-id="<?= $row['id'] ?>"><?= $row['type'] ?></div>
-    <?php
+<div class="tag bordt" data-id="<?= $row['id'] ?>"><?= $row['type'] ?></div>
+<?php
     }
     ?>
-</div>
 <article id="article">
     <h2>健康新知</h2>
     <pre>

@@ -1,4 +1,4 @@
-<fieldset class="fie">
+<fieldset class="fie aut">
     <legend><b>目前位置 : 首頁 > 最新文章</b></legend>
     <table>
         <tr>
